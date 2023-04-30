@@ -1,12 +1,34 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const Stock = require('./models/stock');
+const path = require('path');
+const ejs = require('ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
-const API_KEY = 'a08030255b71b0e00bf7fcba2d9234d8';
+mongoose.connect('mongodb+srv://salmakhaled963:qINU1gHPYtwY96wv@cluster0.ov32zdp.mongodb.net/test')
+.then(() => {
+  console.log('Database connected successfully');
+})
+.catch((err) => {
+  console.error('Error connecting to the database', err);
+});
+
+
+const API_URL = 'https://api.iex.cloud/v1/data/CORE/STOCK_COLLECTION/list';
+const API_GAINERS = 'collectionName=gainers&';
+const API_LOSERS = 'collectionName=losers&';
+const API_KEY = 'pk_351875bcf04542c8acf7bab4fd4b0eed';
+
+
 
 app.get('/tickers', async(req, res)=>{
   try{
-     const response = await fetch(`http://api.marketstack.com/v1/tickers?access_key=${API_KEY}&limit=5&sort=asc`);
+     const response = await fetch(`${API_URL}?${API_GAINERS}token=${API_KEY}`);
      const data = await response.json();
      console.log(data);
      res.json(data);
