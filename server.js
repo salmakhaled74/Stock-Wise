@@ -39,6 +39,7 @@ app.get('/tickers', async(req, res)=>{
 
 app.get('/home', (req, res) => {
   res.sendFile('home.html', { root: __dirname + '/public' });
+  
 });
 
 const port = process.env.PORT || 3000
