@@ -1,4 +1,4 @@
-const mongoose = require('mongoos');
+const mongoose = require('mongoose');
 const stockSchema = new mongoose.Schema({
     Symbol:{
         type: String,
