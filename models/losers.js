@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const stockSchema = new mongoose.Schema({
+const loserSchema = new mongoose.Schema({
     symbol: String,
     change: Number,
     changePercent: Number,
     companyName: String
 });
 
-module.exports = mongoose.model('Stock', stockSchema);
+module.exports = mongoose.model('Loser', loserSchema);
