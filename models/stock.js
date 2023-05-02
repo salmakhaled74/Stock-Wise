@@ -1,13 +1,9 @@
 const mongoose = require('mongoose');
 const stockSchema = new mongoose.Schema({
-    Symbol:{
-        type: String,
-        required: true,
-    }, 
-    Percentage:{
-        type: Number,
-        required: true
-    }
+    symbol: String,
+    change: Number,
+    changePercent: Number,
+    companyName: String
 });
 
 module.exports = mongoose.model('Stock', stockSchema);
