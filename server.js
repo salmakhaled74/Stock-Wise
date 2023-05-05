@@ -41,43 +41,50 @@ const API_PERFORMANCE = '/chart/7d?token='
 
 
 
-app.get('/company/:symbol', async (req, res) => {
+
+
+async function deleteAndInsertStockData() {
   try {
-    const name = req.params.symbol;
-    const response = await fetch(`${API_URL2}${name}${API_PERFORMANCE}${API_KEY}`);
-    const data = await response.json();
-    const stockData = data.map(item => ({
-      symbol: name,
-      close: item.close,
-      high: item.high,
-      low: item.low,
-      open: item.open,
-      priceDate: new Date(item.priceDate),
-      volume: item.volume
-    }));
-
-    const gainer = await gainers.findOne({ symbol: name });
-    const loser = await losers.findOne({ symbol: name });
-
-    let savedData;
-    if (gainer) {
-      savedData = await StockData.insertMany(
-        stockData.map((data) => ({ ...data, gainer: gainer._id }))
-      );
-    } else if (loser) {
-      savedData = await StockData.insertMany(
-        stockData.map((data) => ({ ...data, loser: loser._id }))
-      );
-    } else {
-      savedData = await StockData.insertMany(stockData);
-    }
-
-    res.json(savedData);
-
+    // Delete all documents in the StockData collection
+    await StockData.deleteMany({});
+  
+    // Insert stock data for all gainers and losers
+    const gainerSymbols = await gainers.find({}, { _id: 0, symbol: 1 });
+    const loserSymbols = await losers.find({}, { _id: 0, symbol: 1 });
+  
+    const symbols = [...gainerSymbols, ...loserSymbols].map(({ symbol }) => symbol);
+    const promises = symbols.map(async (symbol) => {
+      const response = await fetch(`${API_URL2}${symbol}${API_PERFORMANCE}${API_KEY}`);
+      const data = await response.json();
+      const stockData = data.map(item => ({
+        symbol: symbol,
+        close: item.close,
+        high: item.high,
+        low: item.low,
+        open: item.open,
+        priceDate: new Date(item.priceDate),
+        volume: item.volume
+      }));
+  
+      const gainer = await gainers.findOne({ symbol: symbol });
+      const loser = await losers.findOne({ symbol: symbol });
+  
+      if (gainer) {
+        return StockData.insertMany(stockData.map((data) => ({ ...data, gainer: gainer._id })));
+      } else if (loser) {
+        return StockData.insertMany(stockData.map((data) => ({ ...data, loser: loser._id })));
+      } else {
+        return StockData.insertMany(stockData);
+      }
+    });
+  
+    await Promise.all(promises);
+  
+    console.log('Stock data deleted and reinserted');
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-});
+}
 
 
 
@@ -138,4 +145,6 @@ app.listen(port, async () => {
   console.log(`Server listening on port ${port}`);
   //await saveGainersDataToDatabase();
   //await saveLosersDataToDatabase();
+  //await deleteAndInsertStockData();
+
 });
