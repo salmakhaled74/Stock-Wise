@@ -51,7 +51,6 @@ app.get('/company/:symbol', async (req, res) => {
 });
 
 
-
 async function deleteAndInsertStockData() {
   try {
     // Delete all documents in the StockData collection

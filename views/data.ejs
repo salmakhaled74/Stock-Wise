@@ -13,72 +13,60 @@
 
 <body>
 
-  <canvas id="line-chart"></canvas>
-  <h1>
-    <%= data[0].symbol %>
-  </h1>
-  <h1>
-    <%= data[0].gainer.companyName %>
-  </h1>
-  <% for (let i=0; i < data.length; i++) { %>
-    <h2>
-      <%= data[i].close %>
-    </h2>
-    <h3>
-      <%= data[i].priceDate.toLocaleDateString('en-GB') %>
-    </h3>
-    <% } %>
+  <h1> <%= data[0].symbol %> </h1>
+  <h2> <%= data[0].gainer.companyName %> </h2>
+  <h3> <%= (data[0].gainer.changePercent * 100).toFixed(2) %> %</h3>
+  <h4> <%= data[0].gainer.change %> </h4>
+  <canvas id="myChart" width="900" height="200"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-      <script>
-        // get the data variable passed from the server-side
-        const data = <%= JSON.stringify(data) %>;
+  <script>
 
-        // use the data variable to create a chart using Chart.js
-        const chartData = {
-          labels: data.map(d => d.priceDate),
-          datasets: [{
-            label: 'Closing Price',
-            data: data.map(d => d.close),
-            borderColor: 'blue',
-            fill: false
-          }]
-        };
+    var data = <%- JSON.stringify(data) %>;
+    var chartData = {
+      labels: data.map(d => new Date(d.priceDate).toLocaleDateString('en-US')),
+      datasets: [{
+        label: 'Closing Price',
+        data: data.map(d => d.close),
+        borderColor: data[0].gainer.change > 0 ? '#32D49D' : '#D43232',
+        fill: false
+      }]
+    };
+    var ctx = document.getElementById('myChart').getContext('2d');
 
-        // create a new chart
-        const ctx = document.getElementById('myChart').getContext('2d');
-        new Chart(ctx, {
-          type: 'line',
-          data: chartData,
-          options: {
-            responsive: true,
-            scales: {
-              xAxes: [{
-                type: 'time',
-                time: {
-                  unit: 'day',
-                  displayFormats: {
-                    day: 'MMM D'
-                  }
-                },
-                ticks: {
-                  maxTicksLimit: 10
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
+    new Chart(ctx, {
+      type: 'line',
+      data: chartData,
+      options: {
+        responsive: true,
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'MM D'
+              }
+            },
+            ticks: {
+              maxTicksLimit: 10
             }
-          }
-        });
-      </script>
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  </script>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-      <script src="/public/apps.js"></script>
-      <script src="https://kit.fontawesome.com/3c14fe92a8.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <script type="module" src="/public/apps.js"></script>
+  <script src="https://kit.fontawesome.com/3c14fe92a8.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
