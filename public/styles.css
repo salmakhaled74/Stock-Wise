@@ -1,0 +1,31 @@
+html,
+body {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    background-color: #1B202C !important;
+}
+
+th {
+    color: #FFFF;
+}
+
+td {
+    color: #FFFF;
+}
+
+.table-hover:hover tbody tr:hover td {
+    color: #FFFF;
+}
+
+a {
+    color: white !important;
+}
+
+.table-responsive {
+    margin-top: 20px;
+    width: 60%;
+    border: 1px solid #FFFF;
+    border-radius: 15px;
+}

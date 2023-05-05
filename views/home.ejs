@@ -12,12 +12,13 @@
 </head>
 
 <body>
+
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
         <tr>
           <th class="fs-3" scope="col">Ranking</th>
-          <th class="fs-3" scope="col">Name</th>
+          <th class="fs-4" scope="col">Name</th>
           <th class="fs-4" scope="col">Symbol</th>
           <th class="fs-4" scope="col">Price</th>
           <th class="fs-4" scope="col">Change Over Time</th>
@@ -30,19 +31,26 @@
               <%= i+1 %>
             </th>
             <td class="fs-4">
-              <%= Gstocks[i].companyName %>
+              <a href="/company/<%= Gstocks[i].symbol%>">
+                <%= Gstocks[i].companyName %>
+              </a>
             </td>
             <td class="fs-4">
               <%= Gstocks[i].symbol %>
             </td>
-            <td class="fw-bold fs-4 text-success">+<%= Gstocks[i].change %>
+            <td class="fw-bold fs-4" style="color: #32D49D;">+<%= Gstocks[i].change %>
+                <i class="fa-solid fa-up-long" style="color: #32D49D;"></i>
             </td>
-            <td class="fw-bold fs-4 text-success">+<%= (Gstocks[i].changePercent * 100).toFixed(2) %>%</td>
+            <td class="fw-bold fs-4" style="color: #32D49D;">+<%= (Gstocks[i].changePercent * 100).toFixed(2) %>%
+                <i class="fa-solid fa-up-long" style="color: #32D49D;"></i>
+            </td>
           </tr>
           <% } %>
       </tbody>
     </table>
   </div>
+
+
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -61,16 +69,20 @@
               <%= i+1 %>
             </th>
             <td class="fs-4">
-              <%= Lstocks[i].companyName %>
+              <a href="/company/<%= Lstocks[i].symbol%>">
+                <%= Lstocks[i].companyName %>
+              </a>
             </td>
             <td class="fs-4">
               <%= Lstocks[i].symbol %>
             </td>
-            <td class="fw-bold fs-4 text-danger">
+            <td class="fw-bold fs-4" style="color: #D43232;">
               <%= Lstocks[i].change %>
+                <i class="fa-solid fa-down-long" style="color: #D43232;"></i>
             </td>
-            <td class="fw-bold fs-4 text-danger">
+            <td class="fw-bold fs-4" style="color: #D43232;">
               <%= (Lstocks[i].changePercent * 100).toFixed(2) %>%
+                <i class="fa-solid fa-down-long" style="color: #D43232;"></i>
             </td>
           </tr>
           <% } %>
@@ -80,6 +92,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/3c14fe92a8.js" crossorigin="anonymous"></script>
+
 
 </body>
 
