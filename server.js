@@ -39,7 +39,16 @@ const API_URL2 = 'https://api.iex.cloud/v1/stock/';
 const API_PERFORMANCE = '/chart/7d?token='
 
 
-
+app.get('/company/:symbol', async (req, res) => {
+  const name = req.params.symbol;
+  try {
+    const data = await StockData.find({ symbol: name }).populate('gainer loser');
+    res.render('data', { data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 
 
