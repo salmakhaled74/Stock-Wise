@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const loserSchema = new Schema({
   symbol: String,
+  close: Number,
   change: Number,
   changePercent: Number,
   companyName: String

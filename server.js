@@ -102,9 +102,10 @@ const saveGainersDataToDatabase = async () => {
     const response = await fetch(`${API_URL}?${API_GAINERS}token=${API_KEY}`);
     const data = await response.json();
     data.forEach(async (stockData) => {
-      const { symbol, change, changePercent, companyName } = stockData;
+      const {close, symbol, change, changePercent, companyName } = stockData;
       const stock = new gainers({
         symbol,
+        close,
         change,
         changePercent,
         companyName
@@ -122,9 +123,10 @@ const saveLosersDataToDatabase = async () => {
     const response = await fetch(`${API_URL}?${API_LOSERS}token=${API_KEY}`);
     const data = await response.json();
     data.forEach(async (stockData) => {
-      const { symbol, change, changePercent, companyName } = stockData;
+      const {close, symbol, change, changePercent, companyName } = stockData;
       const stock = new losers({
         symbol,
+        close,
         change,
         changePercent,
         companyName
@@ -151,8 +153,8 @@ app.get('/home', async (req, res) => {
 const port = process.env.PORT || 3000;
 app.listen(port, async () => {
   console.log(`Server listening on port ${port}`);
-  // await saveGainersDataToDatabase();
-  // await saveLosersDataToDatabase();
-  // await deleteAndInsertStockData();
+   //await saveGainersDataToDatabase();
+   //await saveLosersDataToDatabase();
+   //await deleteAndInsertStockData();
 
 });
