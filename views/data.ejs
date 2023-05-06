@@ -13,31 +13,53 @@
 
 <body>
 
-  <h1> <%= data[0].symbol %> </h1>
-  <h2> <%= data[0].gainer.companyName %> </h2>
-  <h3> <%= (data[0].gainer.changePercent * 100).toFixed(2) %> %</h3>
-  <h4> <%= data[0].gainer.change %> </h4>
-  <canvas id="myChart" width="900" height="200"></canvas>
+  <h1>
+    <%= data[0].symbol %>
+  </h1>
+  <h2>
+    <%= data[0].gainer.companyName %>
+  </h2>
+  <h3>
+    <%= (data[0].gainer.changePercent * 100).toFixed(2) %> %
+  </h3>
+  <h4>
+    <%= data[0].gainer.change %>
+  </h4>
+  <div class="chart">
+    <canvas id="myChart"></canvas>
+
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
 
     var data = <%- JSON.stringify(data) %>;
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient1.addColorStop(1, 'rgba(50, 212, 157, 0.2)'); // lighter green
+    gradient1.addColorStop(0, '#32D49D');
+
+    var gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient2.addColorStop(1, '#D43232');
+    gradient2.addColorStop(0, ); // lighter red
+
     var chartData = {
       labels: data.map(d => new Date(d.priceDate).toLocaleDateString('en-US')),
       datasets: [{
         label: 'Closing Price',
         data: data.map(d => d.close),
         borderColor: data[0].gainer.change > 0 ? '#32D49D' : '#D43232',
-        fill: false
+        fill: true,
+        backgroundColor: data[0].gainer.change > 0 ? gradient1 : gradient2
       }]
     };
-    var ctx = document.getElementById('myChart').getContext('2d');
-
+    
     new Chart(ctx, {
       type: 'line',
       data: chartData,
       options: {
+        radius: 8,
         responsive: true,
         scales: {
           xAxes: [{
@@ -56,7 +78,7 @@
             ticks: {
               beginAtZero: true
             }
-          }]
+          }],
         }
       }
     });
