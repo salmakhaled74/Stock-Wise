@@ -1,7 +1,12 @@
-.chart{
+.chart {
     position: relative;
     width: 50vw;
 }
 
+h1,h2,h3,h4{
+    color: white;
+}
 
-
+body{
+    background-color: #1B202C;
+}

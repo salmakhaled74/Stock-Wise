@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data</title>
-  <link rel="stylesheet" href="/public/styles2.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="/public/styles2.css">
 </head>
 
 <body>
@@ -32,17 +32,20 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
+    Chart.defaults.font.size = 19;
+    Chart.defaults.font.weight = 'bold';
+    Chart.defaults.color = 'white';
 
     var data = <%- JSON.stringify(data) %>;
     var ctx = document.getElementById('myChart').getContext('2d');
 
     var gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
     gradient1.addColorStop(1, 'rgba(50, 212, 157, 0.2)'); // lighter green
-    gradient1.addColorStop(0, '#32D49D');
+    gradient1.addColorStop(0, 'rgba(50, 212, 157)');
 
     var gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient2.addColorStop(1, '#D43232');
-    gradient2.addColorStop(0, ); // lighter red
+    gradient2.addColorStop(0, 'rgba(212, 50 , 50)');
+    gradient2.addColorStop(1, 'rgba(212, 50, 50, 0.2)'); // lighter red
 
     var chartData = {
       labels: data.map(d => new Date(d.priceDate).toLocaleDateString('en-US')),
@@ -54,15 +57,20 @@
         backgroundColor: data[0].gainer.change > 0 ? gradient1 : gradient2
       }]
     };
-    
+
     new Chart(ctx, {
       type: 'line',
       data: chartData,
       options: {
         radius: 8,
+        hitRadius: 30,
+        hoverRadius: 12,
         responsive: true,
         scales: {
           xAxes: [{
+            grid: {
+              color: "white"
+            },
             type: 'time',
             time: {
               unit: 'day',
@@ -75,19 +83,20 @@
             }
           }],
           yAxes: [{
+            grid: {
+              color: "white"
+            },
             ticks: {
               beginAtZero: true
             }
           }],
-        }
+        },
       }
     });
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
-  <script type="module" src="/public/apps.js"></script>
   <script src="https://kit.fontawesome.com/3c14fe92a8.js" crossorigin="anonymous"></script>
 </body>
 
