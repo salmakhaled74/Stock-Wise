@@ -16,15 +16,27 @@
   <h1>
     <%= data[0].symbol %>
   </h1>
-  <h2>
-    <%= data[0].gainer.companyName %>
-  </h2>
-  <h3>
-    <%= (data[0].gainer.changePercent * 100).toFixed(2) %> %
-  </h3>
-  <h4>
-    <%= data[0].gainer.change %>
-  </h4>
+  <% if (data[0].gainer) { %>
+    <h2>
+      <%= data[0].gainer.companyName %>
+    </h2>
+    <h3>
+      <%= data[0].gainer.changePercent ? (data[0].gainer.changePercent * 100).toFixed(2) + "%" : "" %>
+      <br>
+      <%= data[0].gainer.change ? (data[0].gainer.change > 0 ? "+" : "") + data[0].gainer.change : "" %>
+    </h3>
+  <% } else { %>
+    <h2>
+      <%= data[0].loser.companyName %>
+    </h2>
+    <h3>
+      <%= data[0].loser.changePercent ? (data[0].loser.changePercent * 100).toFixed(2) + "%" : "" %>
+      <br>
+      <%= data[0].loser.change ? (data[0].loser.change > 0 ? "+" : "") + data[0].loser.change : "" %>
+    </h3>
+  <% } %>
+
+
   <div class="chart">
     <canvas id="myChart"></canvas>
 
@@ -52,9 +64,9 @@
       datasets: [{
         label: 'Closing Price',
         data: data.map(d => d.close),
-        borderColor: data[0].gainer.change > 0 ? '#32D49D' : '#D43232',
+        borderColor: data[0].close >= data[data.length - 1].close ? gradient2 : gradient1,
         fill: true,
-        backgroundColor: data[0].gainer.change > 0 ? gradient1 : gradient2
+        backgroundColor: data[0].close >= data[data.length - 1].close ? gradient2 : gradient1,
       }]
     };
 
@@ -67,14 +79,14 @@
         hoverRadius: 12,
         responsive: true,
         scales: {
-          x:{
+          x: {
             grid: {
-              color: "white"
+              display: false
             }
           },
-          y:{
-            grid:{
-              color: "white"
+          y: {
+            grid: {
+              display: false
             }
           },
           xAxes: [{
