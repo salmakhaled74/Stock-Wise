@@ -151,8 +151,8 @@ app.get('/home', async (req, res) => {
 const port = process.env.PORT || 3000;
 app.listen(port, async () => {
   console.log(`Server listening on port ${port}`);
-  //await saveGainersDataToDatabase();
-  //await saveLosersDataToDatabase();
-  //await deleteAndInsertStockData();
+  // await saveGainersDataToDatabase();
+  // await saveLosersDataToDatabase();
+  // await deleteAndInsertStockData();
 
 });
