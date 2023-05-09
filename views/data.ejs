@@ -12,33 +12,31 @@
 </head>
 
 <body>
-
   <h1>
     <%= data[0].symbol %>
   </h1>
   <% if (data[0].gainer) { %>
     <h1>
-      <%= data[0].gainer.close %> usd
+      <%= data[0].gainer.close %> USD
     </h1>
     <h2>
       <%= data[0].gainer.companyName %>
     </h2>
-    <h3 style="color: rgba(50, 212, 157);">
-      <%= data[0].gainer.changePercent ? (data[0].gainer.changePercent * 100).toFixed(2) + "%" : "" %>
-      <br>
-      <%= data[0].gainer.change ? (data[0].gainer.change > 0 ? "+" : "") + data[0].gainer.change : "" %>
+    <h3 >
+      <button type="button" class="btn btn-success btn-lg"><%= data[0].gainer.changePercent ? (data[0].gainer.changePercent * 100).toFixed(2) + "%" : "" %></button>
+      <button type="button" class="btn btn-success btn-lg"><%= data[0].gainer.change ? (data[0].gainer.change > 0 ? "+" : "") + data[0].gainer.change : "" %></button>
+
     </h3>
   <% } else { %>
     <h1>
-      <%= data[0].loser.close %> usd
+      <%= data[0].loser.close %> USD
     </h1>
     <h2>
       <%= data[0].loser.companyName %>
     </h2>
     <h3>
-      <%= data[0].loser.changePercent ? (data[0].loser.changePercent * 100).toFixed(2) + "%" : "" %>
-      <br>
-      <%= data[0].loser.change ? (data[0].loser.change > 0 ? "+" : "") + data[0].loser.change : "" %>
+      <button type="button" class="btn btn-danger btn-lg"><%= data[0].loser.changePercent ? (data[0].loser.changePercent * 100).toFixed(2) + "%" : "" %></button>
+      <button type="button" class="btn btn-danger btn-lg"><%= data[0].loser.change ? (data[0].loser.change > 0 ? "+" : "") + data[0].loser.change : "" %></button>
     </h3>
   <% } %>
 
@@ -75,6 +73,9 @@
         backgroundColor: data[0].close >= data[data.length - 1].close ? gradient2 : gradient1,
       }]
     };
+
+    // const sum = data.reduce((acc, cur) => acc + cur.close, 0);
+    // const average = sum / data.length;
 
     new Chart(ctx, {
       type: 'line',
