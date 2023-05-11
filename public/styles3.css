@@ -1,0 +1,52 @@
+body,
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    padding-top: 0px;
+    height: 100%;
+    font-family: 'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Arial', 'Georgia';
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: url('../public/blob-haikei\ 3.png') no-repeat;
+    background-size: cover;
+    padding-bottom: 500px;
+}
+
+a {
+    text-decoration: none !important;
+    color: white;
+}
+img {
+    width: 880px;
+    height: 880px;
+}
+
+p {
+    color: #CCCCCC;
+    font-family: 'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Arial', 'Georgia';
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.btn-lg {
+    border-radius: 30px;
+    width: 200px;
+    height: 50px;
+}
+
+.cardd {
+    color: black;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}

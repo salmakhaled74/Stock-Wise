@@ -5,29 +5,42 @@ body {
     padding: 0 !important;
     height: 100% !important;
     background-color: #1B202C !important;
-}
-
-
-
-th {
-    color: #FFFF;
-}
-
-td {
-    color: #FFFF;
-}
-
-.table-hover:hover tbody tr:hover td {
-    color: #FFFF;
+    font-family: 'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Arial', 'Georgia' !important;
 }
 
 a {
-    color: white !important;
+    text-decoration: none !important;
 }
+
+th {
+    color: #CCCCCC;
+}
+
+td {
+    color: #CCCCCC;
+}
+
+a {
+    color: #CCCCCC;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: #CCCCCC;
+}
+.table-hover tbody tr:hover th{
+    background-color: #CCCCCC;
+}
+
+.table-hover tbody a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
 
 .table-responsive {
     margin-top: 20px;
     width: 60%;
-    border: 1px solid #FFFF;
+    border: 1px solid #CCCCCC;
     border-radius: 15px;
 }

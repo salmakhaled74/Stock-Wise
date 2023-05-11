@@ -51,6 +51,7 @@ app.get('/company/:symbol', async (req, res) => {
 });
 
 
+
 async function deleteAndInsertStockData() {
   try {
     // Delete all documents in the StockData collection
@@ -143,6 +144,17 @@ app.get('/home', async (req, res) => {
     const Gstocks = await gainers.find().sort({ changePercent: 'desc' }).limit(5);
     const Lstocks = await losers.find().sort({ changePercent: 'desc' }).limit(5);
     res.render('home', { Gstocks, Lstocks });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/', async(req, res) =>{
+  try {
+    const Gstocks = await gainers.find().sort({ changePercent: 'desc' }).limit(5);
+    const Lstocks = await losers.find().sort({ changePercent: 'desc' }).limit(5);
+    res.render('index', { Gstocks, Lstocks });
   } catch (error) {
     console.log(error);
     res.status(500).send('Internal Server Error');

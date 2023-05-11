@@ -12,39 +12,49 @@
 </head>
 
 <body>
-  <h1>
-    <%= data[0].symbol %>
-  </h1>
-  <% if (data[0].gainer) { %>
+  <div class="card" style="width: 18rem;">
     <h1>
-      <%= data[0].gainer.close %> USD
+      <%= data[0].symbol %>
     </h1>
-    <h2>
-      <%= data[0].gainer.companyName %>
-    </h2>
-    <h3 >
-      <button type="button" class="btn btn-success btn-lg"><%= data[0].gainer.changePercent ? (data[0].gainer.changePercent * 100).toFixed(2) + "%" : "" %></button>
-      <button type="button" class="btn btn-success btn-lg"><%= data[0].gainer.change ? (data[0].gainer.change > 0 ? "+" : "") + data[0].gainer.change : "" %></button>
+    <% if (data[0].gainer) { %>
+      <h1>
+        <%= data[0].gainer.close %> USD
+      </h1>
+      <h2>
+        <%= data[0].gainer.companyName %>
+      </h2>
+      <h3>
+        <button type="button" style="background-color: #31cb98; font-weight: bold;" class="btn btn-success btn-lg">
+          <%= data[0].gainer.changePercent ? (data[0].gainer.changePercent * 100).toFixed(2) + "%" : "" %>
+        </button>
+        <button type="button" style="background-color: #31cb98; font-weight: bold;" class="btn btn-success btn-lg">
+          <%= data[0].gainer.change ? (data[0].gainer.change> 0 ? "+" : "") + data[0].gainer.change : "" %>
+        </button>
 
-    </h3>
-  <% } else { %>
-    <h1>
-      <%= data[0].loser.close %> USD
-    </h1>
-    <h2>
-      <%= data[0].loser.companyName %>
-    </h2>
-    <h3>
-      <button type="button" class="btn btn-danger btn-lg"><%= data[0].loser.changePercent ? (data[0].loser.changePercent * 100).toFixed(2) + "%" : "" %></button>
-      <button type="button" class="btn btn-danger btn-lg"><%= data[0].loser.change ? (data[0].loser.change > 0 ? "+" : "") + data[0].loser.change : "" %></button>
-    </h3>
-  <% } %>
-
-
-  <div class="chart">
-    <canvas id="myChart"></canvas>
-
+      </h3>
+      <% } else { %>
+        <h1>
+          <%= data[0].loser.close %> USD
+        </h1>
+        <h2>
+          <%= data[0].loser.companyName %>
+        </h2>
+        <h3>
+          <button type="button" class="btn btn-danger btn-lg">
+            <%= data[0].loser.changePercent ? (data[0].loser.changePercent * 100).toFixed(2) + "%" : "" %>
+          </button>
+          <button type="button" class="btn btn-danger btn-lg">
+            <%= data[0].loser.change ? (data[0].loser.change> 0 ? "+" : "") + data[0].loser.change : "" %>
+          </button>
+        </h3>
+        <% } %>
   </div>
+  <div class="card" style="width: 900px;">
+    <div class="chart card-body">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script>
