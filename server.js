@@ -34,7 +34,7 @@ mongoose.connect('mongodb+srv://salmakhaled963:qINU1gHPYtwY96wv@cluster0.ov32zdp
 const API_URL = 'https://api.iex.cloud/v1/data/CORE/STOCK_COLLECTION/list';
 const API_GAINERS = 'collectionName=gainers&';
 const API_LOSERS = 'collectionName=losers&';
-const API_KEY = 'pk_351875bcf04542c8acf7bab4fd4b0eed';
+const API_KEY = 'sk_495dd15141e44008a8a1c88ef1f8c763';
 const API_URL2 = 'https://api.iex.cloud/v1/stock/';
 const API_PERFORMANCE = '/chart/7d?token='
 

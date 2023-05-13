@@ -5,18 +5,31 @@
 
 
 h1,h2, h3, h4{
-    color: #CCCCCC;
+    color: white;
 }
 
 .card{
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card-body, .card{
     background-color: #2c3748;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .card {
+    margin: 0 10px;
+  }
 
 body {
     box-sizing: border-box;

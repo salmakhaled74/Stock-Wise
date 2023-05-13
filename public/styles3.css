@@ -21,8 +21,8 @@ a {
     color: white;
 }
 img {
-    width: 880px;
-    height: 880px;
+    width: 850px;
+    height: 850px;
 }
 
 p {
@@ -41,6 +41,7 @@ p {
     height: 50px;
 }
 
+
 .cardd {
     color: black;
     display: inline-block;
@@ -50,3 +51,4 @@ p {
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
