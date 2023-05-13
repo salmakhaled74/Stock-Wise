@@ -1,4 +1,7 @@
 # Stock-app
+
+![Screenshot from 2023-05-13 03-41-35](https://github.com/salmakhaled74/Stock-Wise/assets/77203008/bb55f2f1-4b67-44e8-99ef-e909d10ff0f6)
+
 ![Screenshot from 2023-05-13 03-43-03](https://github.com/salmakhaled74/Stock-Wise/assets/77203008/6cb81870-10e0-44c6-af56-ab127644de6c)
 
 ![Screenshot from 2023-05-13 03-42-48](https://github.com/salmakhaled74/Stock-Wise/assets/77203008/07ec3c93-5c74-49c7-9e2e-117e97969097)
