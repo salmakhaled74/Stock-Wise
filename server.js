@@ -7,6 +7,7 @@ const ejs = require('ejs');
 const gainers = require('./models/gainers');
 const losers = require('./models/losers');
 const StockData = require('./models/stock');
+require('dotenv').config();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.engine('ejs', ejs.renderFile);
@@ -23,7 +24,7 @@ app.use('/public', express.static(path.join(__dirname, 'public'), {
   },
 }));
 
-mongoose.connect('mongodb+srv://salmakhaled963:qINU1gHPYtwY96wv@cluster0.ov32zdp.mongodb.net/test')
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING)
   .then(() => {
     console.log('Database connected successfully');
   })
@@ -34,9 +35,9 @@ mongoose.connect('mongodb+srv://salmakhaled963:qINU1gHPYtwY96wv@cluster0.ov32zdp
 const API_URL = 'https://api.iex.cloud/v1/data/CORE/STOCK_COLLECTION/list';
 const API_GAINERS = 'collectionName=gainers&';
 const API_LOSERS = 'collectionName=losers&';
-const API_KEY = 'sk_495dd15141e44008a8a1c88ef1f8c763';
+const API_KEY = process.env.IEX_API_KEY;
 const API_URL2 = 'https://api.iex.cloud/v1/stock/';
-const API_PERFORMANCE = '/chart/7d?token='
+const API_PERFORMANCE = '/chart/7d?token=';
 
 
 app.get('/company/:symbol', async (req, res) => {
